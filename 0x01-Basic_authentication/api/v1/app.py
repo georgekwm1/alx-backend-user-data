@@ -21,6 +21,7 @@ if auth_type == 'auth':
 
 @app.before_request
 def check_user_auth():
+    """Checks user authentication"""
     if auth is None:
         return
     if auth.require_auth(request.path,
