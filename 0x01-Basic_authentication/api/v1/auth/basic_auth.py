@@ -4,6 +4,7 @@ from flask import request
 from typing import List, TypeVar, Tuple
 from api.v1.auth.auth import Auth
 import base64
+import re
 from models.user import User
 
 
