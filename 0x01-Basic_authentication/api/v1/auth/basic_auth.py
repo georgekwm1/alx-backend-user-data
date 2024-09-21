@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """6. Basic auth"""
 from flask import request
-from typing import List, TypeVar
+from typing import List, TypeVar, Tuple
 from api.v1.auth.auth import Auth
 import base64
 from models.user import User
