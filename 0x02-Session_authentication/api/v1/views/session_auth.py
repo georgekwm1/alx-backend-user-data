@@ -33,5 +33,4 @@ def login():
         user.password(password)
         user.id = auth.create_session(user)
         return user.to_json()
-
         # return jsonify({"session_id": session_id}), 200
