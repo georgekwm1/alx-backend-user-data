@@ -22,6 +22,3 @@ class User(Base):
     first_name = Column(String(250), nullable=True)
     session_id = Column(String(250), nullable=True)
     reset_token = Column(String(250), nullable=True)
-
-
-Base.metadata.create_all(engine)
