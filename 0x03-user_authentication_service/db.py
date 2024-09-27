@@ -40,23 +40,6 @@ class DB:
         self._session.commit()
         return user
 
-    # def find_user_by(self, **kwargs: dict) -> User:
-    #     """find user by name or email"""
-    #     if not kwargs:
-    #         raise ValueError("No attributes provided")
-
-    #     try:
-    #         user = self._session.query(User).filter_by(**kwargs).first()
-
-    #         if user is None:
-    #             raise NoResultFound
-
-    #         return user
-    #     except NoResultFound:
-    #         print("Not found")
-    #     except InvalidRequestError:
-    #         return InvalidRequestError()
-        # print(f"Invalid: {e}")
     def find_user_by(self, **kwargs: dict) -> User:
         """find user by name or email"""
         if not kwargs:
