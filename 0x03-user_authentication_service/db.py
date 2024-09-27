@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """DB module
 """
+from user import Base, User
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from typing import TypeVar
 from sqlalchemy.exc import NoResultFound, InvalidRequestError
-
-from user import Base, User
+import logging
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 
 class DB:
@@ -39,19 +40,29 @@ class DB:
         self._session.commit()
         return user
 
+    # def find_user_by(self, **kwargs: dict) -> User:
+    #     """find user by name or email"""
+    #     if not kwargs:
+    #         raise ValueError("No attributes provided")
+
+    #     try:
+    #         user = self._session.query(User).filter_by(**kwargs).first()
+
+    #         if user is None:
+    #             raise NoResultFound
+
+    #         return user
+    #     except NoResultFound:
+    #         print("Not found")
+    #     except InvalidRequestError:
+    #         return InvalidRequestError()
+        # print(f"Invalid: {e}")
     def find_user_by(self, **kwargs: dict) -> User:
         """find user by name or email"""
         if not kwargs:
             raise ValueError("No attributes provided")
 
-        try:
-            user = self._session.query(User).filter_by(**kwargs).first()
-
-            if user is None:
-                raise NoResultFound
-
-            return user
-        except NoResultFound:
-            print("Not found")
-        except Exception as e:
-            print(f"Invalid: {e}")
+        user = self._session.query(User).filter_by(**kwargs).first()
+        if user is None:
+            raise NoResultFound
+        return user

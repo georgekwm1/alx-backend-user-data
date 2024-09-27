@@ -6,7 +6,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
-
+import logging
+logging.getLogger('sqlalchemy').setLevel(logging.CRITICAL)
 
 engine = create_engine('sqlite:///app.db', echo=False)
 Base = declarative_base()
