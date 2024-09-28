@@ -57,15 +57,14 @@ class Auth:
 
     def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
         """Returns a user from a session ID"""
+        if session_id is None:
+            return None
         try:
             user = self._db._session.query(User).filter_by(
                 session_id=session_id).first()
-            if user:
-                return user
-            else:
-                return None
         except NoResultFound:
             return None
+        return user
 
     def destroy_session(self, user_id: str) -> None:
         """Destroys a user session"""
