@@ -4,6 +4,7 @@
 from flask import Flask, jsonify, request, abort
 from user import User
 from auth import Auth
+from sqlalchemy.orm.exc import NoResultFound
 
 app = Flask(__name__)
 auth = Auth()
@@ -40,11 +41,13 @@ def login():
         new_login = auth.valid_login(email, password)
         if new_login:
             session_id = auth.create_session(email)
-            return jsonify({"email": email, "message": "logged in"})
+            response = jsonify({"email": email, "message": "logged in"})
+            response.set_cookie("session_id", session_id)
+            return response
         else:
             abort(401)
     except Exception:
-        abort(401)
+        raise NoResultFound
 
 
 if __name__ == "__main__":
