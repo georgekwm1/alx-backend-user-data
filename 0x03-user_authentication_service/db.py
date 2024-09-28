@@ -56,9 +56,9 @@ class DB:
         for key in kwargs:
             if not hasattr(User, key):
                 raise ValueError
-
+        user = self.find_user_by(id=user_id)
         # self.find_user_by(id=user_id).update(**kwargs)
         for key, value in kwargs.items():
-            setattr(self.find_user_by(id=user_id), key, value)
+            setattr(user, key, value)
         self.__session.commit()
         return None
