@@ -26,4 +26,5 @@ class Auth:
                 is not None:
             raise ValueError(f"User {email} already exists")
         user = self._db.add_user(email, hashed_password)
+        self._db.commit()
         return user
